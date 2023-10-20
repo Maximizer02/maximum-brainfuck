@@ -30,7 +30,7 @@ namespace MaximumBrainfuck
                     case '+': tape[pointer]++; break;
                     case '-': tape[pointer]--; break;
                     case '.': Console.Write((char)tape[pointer]); break;
-                    case ',': tape[pointer]=Console.ReadLine()[0]; break;
+                    case ',': tape[pointer]=Console.ReadKey().KeyChar; break;
                     case '[':
 
                         if (tape[pointer] == 0)
@@ -74,6 +74,10 @@ namespace MaximumBrainfuck
                         break;
                     case ':':
                         Console.Write(tape[pointer]);
+                        break;
+                     case '=':
+                     
+                        pointer = tape[pointer];
                         break;
                         
                 }
