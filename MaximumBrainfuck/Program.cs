@@ -72,6 +72,9 @@ namespace MaximumBrainfuck
                     case '@':
                         tape[pointer] = tape[tape[pointer]];
                         break;
+                    case ':':
+                        Console.Write(tape[pointer]);
+                        break;
                 }
                 a++;
             }
