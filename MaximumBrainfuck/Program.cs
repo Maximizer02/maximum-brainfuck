@@ -6,18 +6,19 @@ namespace MaximumBrainfuck
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            if (args.Length > 0)
+                brainfuck(args[0]);
         }
 
         static void brainfuck(string arg)
         {
 
-            int[] arr = new int[1000];
-            int pointer = 500;
+            int[] tape = new int[1000];
+            int pointer = 0;
             int a = 0;
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < tape.Length; i++)
             {
-                arr[i] = 0;
+                tape[i] = 0;
             }
 
             while (a < arg.Length)
@@ -27,12 +28,12 @@ namespace MaximumBrainfuck
                 {
                     case '>': pointer++; break;
                     case '<': pointer--; break;
-                    case '+': arr[pointer]++; break;
-                    case '-': arr[pointer]--; break;
-                    case '.': Console.Write((char)arr[pointer]); break;
+                    case '+': tape[pointer]++; break;
+                    case '-': tape[pointer]--; break;
+                    case '.': Console.Write((char)tape[pointer]); break;
                     case '[':
 
-                        if (arr[pointer] == 0)
+                        if (tape[pointer] == 0)
                         {
                             int skip = 0;
                             int ptr = a + 1;
@@ -49,7 +50,7 @@ namespace MaximumBrainfuck
                         break;
                     case ']':
 
-                        if (arr[pointer] != 0)
+                        if (tape[pointer] != 0)
                         {
                             int skip = 0;
                             int ptr = a - 1;
@@ -64,7 +65,12 @@ namespace MaximumBrainfuck
 
                             }
                         }
-
+                        break;
+                    case '_':
+                        tape[pointer] = 0;
+                        break;
+                    case '@':
+                        tape[pointer] = tape[tape[pointer]];
                         break;
                 }
                 a++;
