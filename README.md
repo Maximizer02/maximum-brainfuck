@@ -9,7 +9,8 @@ This is my take on extending the Brainfuk interpreter beyond the rather limited 
 - "<" : Go to Previous cell in the Tape.
 - "+" : Increment value of current cell.
 - "-" : Decrement value of current cell.
-- "." : Print Ascii Charater associatedwith  value of current cell.
+- "." : Print Ascii Character associated with value of current cell.
+- "," : Read Single Ascii Character from console into current cell. 
 - "[" : Start Loop.
 - "]" : End Loop.
 ### Maximum Brainfuck

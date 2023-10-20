@@ -12,7 +12,6 @@ namespace MaximumBrainfuck
 
         static void brainfuck(string arg)
         {
-
             int[] tape = new int[1000];
             int pointer = 0;
             int a = 0;
@@ -31,6 +30,7 @@ namespace MaximumBrainfuck
                     case '+': tape[pointer]++; break;
                     case '-': tape[pointer]--; break;
                     case '.': Console.Write((char)tape[pointer]); break;
+                    case ',': tape[pointer]=Console.ReadLine()[0]; break;
                     case '[':
 
                         if (tape[pointer] == 0)
@@ -75,10 +75,10 @@ namespace MaximumBrainfuck
                     case ':':
                         Console.Write(tape[pointer]);
                         break;
+                        
                 }
                 a++;
             }
-
         }
     }
 }
