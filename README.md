@@ -21,5 +21,5 @@ This is my take on extending the Brainfuk interpreter beyond the rather limited 
 - "(":  Start off callable  Method
 - ")"   End off Method
 - "#"   Call Method of current Cell value (1st Method:0, 2nd Method:1 etc)
-
-##### might flip @ and = idk
+- "?"   Put value of currentcellinto cache.
+- "!"   Put cached value into current cell.

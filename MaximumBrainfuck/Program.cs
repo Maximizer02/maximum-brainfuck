@@ -17,6 +17,7 @@ namespace MaximumBrainfuck
             int[] tape = new int[1000];
             Stack<int> returnStack = new Stack<int>();
             List<int> methodList = new List<int>();
+            int cache = 0;
             int tapePointer = 0;
             int codePointer = 0;
             for (int i = 0; i < tape.Length; i++)
@@ -73,13 +74,13 @@ namespace MaximumBrainfuck
                     case '_':
                         tape[tapePointer] = 0;
                         break;
-                    case '@':
+                    case '=':
                         tape[tapePointer] = tape[tape[tapePointer]];
                         break;
                     case ':':
                         Console.Write(tape[tapePointer]);
                         break;
-                     case '=':
+                     case '@':
                         tapePointer = tape[tapePointer];
                         break;
                     case'(':
@@ -93,12 +94,16 @@ namespace MaximumBrainfuck
                         codePointer=returnStack.Pop();
                     break;
                     case'#':
-                    //Console.WriteLine("methods");
-                    //foreach(int i in methodList){Console.WriteLine(i);}
-                    //Console.WriteLine(tape[0]+";"+tape[1]+";"+tape[2]+";"+tape[3]);
+
                         returnStack.Push(codePointer);
                         codePointer=methodList[tape[tapePointer]];
                     break;
+                    case '?':
+                        cache = tape[tapePointer];
+                        break;
+                    case '!':
+                        tape[tapePointer] = cache;
+                        break;
                 }
                 //Console.WriteLine(tape[0]+";"+tape[1]);
                 codePointer++;
