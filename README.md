@@ -23,3 +23,4 @@ This is my take on extending the Brainfuk interpreter beyond the rather limited 
 - "#"   Call Method of current Cell value (1st Method:0, 2nd Method:1 etc)
 - "?"   Put value of currentcellinto cache.
 - "!"   Put cached value into current cell.
+- "^"   Square the current value of the cell.
