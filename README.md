@@ -14,13 +14,15 @@ This is my take on extending the Brainfuk interpreter beyond the rather limited 
 - "[" : Start Loop.
 - "]" : End Loop.
 ### Maximum Brainfuck
-- "_":  Floor curent cell to 0.
-- "=":  Write Value of the cell whose index is the current cells value into the curent cell.
-- ":":  Like ".", but prints the actual number instead of the character.
-- "@":  Set Pointer to value of current cell.
-- "(":  Start off callable Method.
-- ")"   End off Method.
-- "#"   Call Method of current Cell value. (1st Method:0, 2nd Method:1 etc)
-- "?"   Put value of current cell into cache.
-- "!"   Put cached value into current cell.
-- "^"   Square the current value of the cell.
+- "_" : Floor curent cell to 0.
+- "=" : Write Value of the cell whose index is the current cells value into the curent cell.
+- ":" : Like ".", but prints the actual number instead of the character.
+- "@" : Set Pointer to value of current cell.
+- "(" : Start off callable Method.
+- ")" : End off Method.
+- "#" : Call Method of current Cell value. (1st Method:0, 2nd Method:1 etc)
+- "?" : Put value of current cell into cache.
+- "!" : Put cached value into current cell.
+- "^" : Square the current value of the cell.
+- "*" : Multiply value of current cell with cached value.
+- "/" : Divide value of current cell by cached value, value will be floored.
