@@ -18,5 +18,8 @@ This is my take on extending the Brainfuk interpreter beyond the rather limited 
 - "@":  Write Value of the cell whos index is the current cells value into the curent cell.
 - ":":  Like ".", but prints the actual number instead of the character
 - "=":  Set Pointer to value of current cell 
+- "(":  Start off callable  Method
+- ")"   End off Method
+- "#"   Call Method of current Cell value (1st Method:0, 2nd Method:1 etc)
 
 ##### might flip @ and = idk

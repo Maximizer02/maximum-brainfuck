@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MaximumBrainfuck
 {
@@ -10,39 +12,41 @@ namespace MaximumBrainfuck
                 brainfuck(args[0]);
         }
 
-        static void brainfuck(string arg)
+        static void brainfuck(string code)
         {
             int[] tape = new int[1000];
-            int pointer = 0;
-            int a = 0;
+            Stack<int> returnStack = new Stack<int>();
+            List<int> methodList = new List<int>();
+            int tapePointer = 0;
+            int codePointer = 0;
             for (int i = 0; i < tape.Length; i++)
             {
                 tape[i] = 0;
             }
 
-            while (a < arg.Length)
+            while (codePointer < code.Length)
             {
 
-                switch (arg.ToCharArray()[a])
+                switch (code.ToCharArray()[codePointer])
                 {
-                    case '>': pointer++; break;
-                    case '<': pointer--; break;
-                    case '+': tape[pointer]++; break;
-                    case '-': tape[pointer]--; break;
-                    case '.': Console.Write((char)tape[pointer]); break;
-                    case ',': tape[pointer]=Console.ReadKey().KeyChar; break;
+                    case '>': tapePointer++; break;
+                    case '<': tapePointer--; break;
+                    case '+': tape[tapePointer]++; break;
+                    case '-': tape[tapePointer]--; break;
+                    case '.': Console.Write((char)tape[tapePointer]); break;
+                    case ',': tape[tapePointer]=Console.ReadKey().KeyChar; break;
                     case '[':
 
-                        if (tape[pointer] == 0)
+                        if (tape[tapePointer] == 0)
                         {
                             int skip = 0;
-                            int ptr = a + 1;
-                            while (arg.ToCharArray()[ptr] != 93 || skip > 0)
+                            int ptr = codePointer + 1;
+                            while (code.ToCharArray()[ptr] != 93 || skip > 0)
                             {
-                                if (arg.ToCharArray()[ptr] == 91) { skip++; }
-                                else if (arg.ToCharArray()[ptr] == 93) { skip--; }
+                                if (code.ToCharArray()[ptr] == 91) { skip++; }
+                                else if (code.ToCharArray()[ptr] == 93) { skip--; }
                                 ptr++;
-                                a = ptr;
+                                codePointer = ptr;
 
                             }
                         }
@@ -50,39 +54,56 @@ namespace MaximumBrainfuck
                         break;
                     case ']':
 
-                        if (tape[pointer] != 0)
+                        if (tape[tapePointer] != 0)
                         {
                             int skip = 0;
-                            int ptr = a - 1;
+                            int ptr = codePointer - 1;
 
-                            while (arg.ToCharArray()[ptr] != 91 || skip > 0)
+                            while (code.ToCharArray()[ptr] != 91 || skip > 0)
                             {
-                                if (arg.ToCharArray()[ptr] == 93) { skip++; }
+                                if (code.ToCharArray()[ptr] == 93) { skip++; }
                                 else
-                                if (arg.ToCharArray()[ptr] == 91) { skip--; }
+                                if (code.ToCharArray()[ptr] == 91) { skip--; }
                                 ptr--;
-                                a = ptr;
+                                codePointer = ptr;
 
                             }
                         }
                         break;
                     case '_':
-                        tape[pointer] = 0;
+                        tape[tapePointer] = 0;
                         break;
                     case '@':
-                        tape[pointer] = tape[tape[pointer]];
+                        tape[tapePointer] = tape[tape[tapePointer]];
                         break;
                     case ':':
-                        Console.Write(tape[pointer]);
+                        Console.Write(tape[tapePointer]);
                         break;
                      case '=':
-                     
-                        pointer = tape[pointer];
+                        tapePointer = tape[tapePointer];
                         break;
-                        
+                    case'(':
+                        methodList.Add(codePointer);
+                        while(code[codePointer]!=41)
+                        {
+                            codePointer++;
+                        }
+                    break;
+                    case')':
+                        codePointer=returnStack.Pop();
+                    break;
+                    case'#':
+                    //Console.WriteLine("methods");
+                    //foreach(int i in methodList){Console.WriteLine(i);}
+                    //Console.WriteLine(tape[0]+";"+tape[1]+";"+tape[2]+";"+tape[3]);
+                        returnStack.Push(codePointer);
+                        codePointer=methodList[tape[tapePointer]];
+                    break;
                 }
-                a++;
+                //Console.WriteLine(tape[0]+";"+tape[1]);
+                codePointer++;
             }
+            
         }
     }
 }
