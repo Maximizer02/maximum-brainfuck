@@ -105,14 +105,17 @@ namespace MaximumBrainfuck
                         tape[tapePointer] = cache;
                         break;
                     case '^':
-                        tape[tapePointer] = tape[tapePointer]*tape[tapePointer];
+                        tape[tapePointer] *= tape[tapePointer];
                         break;
                     case '*':
-                        tape[tapePointer] = tape[tapePointer]*cache;
+                        tape[tapePointer] *= cache;
                         break;
                     case '/':
-                        tape[tapePointer] = tape[tapePointer]/cache;
+                        tape[tapePointer] /= cache;
                         break;
+                    case '&':
+                        tape[tapePointer] += cache;
+                        break;    
 
                 }
                 //Console.WriteLine(tape[0]+";"+tape[1]);

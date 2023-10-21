@@ -26,3 +26,4 @@ This is my take on extending the Brainfuk interpreter beyond the rather limited 
 - "^" : Square the current value of the cell.
 - "*" : Multiply value of current cell with cached value.
 - "/" : Divide value of current cell by cached value, value will be floored.
+- "&" : Add cached value onto current cells value.
