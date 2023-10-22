@@ -94,7 +94,6 @@ namespace MaximumBrainfuck
                         codePointer=returnStack.Pop();
                     break;
                     case'#':
-
                         returnStack.Push(codePointer);
                         codePointer=methodList[tape[tapePointer]];
                     break;
@@ -119,7 +118,10 @@ namespace MaximumBrainfuck
                      case '|':
                         tape[tapePointer] -= cache;
                         break;    
-
+                    case'§':
+                        returnStack.Push(codePointer);
+                        codePointer=methodList[0];
+                    break;
                 }
                 //Console.WriteLine(tape[0]+";"+tape[1]);
                 codePointer++;
