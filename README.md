@@ -1,7 +1,7 @@
 # Maximum Brainfuck
 
 ### Summary
-This is my take on extending the Brainfuk interpreter beyond the rather limited default functionalities. Mbf is a complete superset of Brainfuck, meaning that the Mbf interpreter can handle all standard brainfuck code but is able to do more with the extended character set.
+This is my take on extending the Brainfuck interpreter beyond the rather limited default functionalities. Mbf is a complete superset of Brainfuck, meaning that the Mbf interpreter can handle all standard brainfuck code but is able to do more with the extended character set.
 
 
 ### Basic Brainfuck
