@@ -29,3 +29,4 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - "&" : Add cached value onto current cells value.
 - "|" : Subtract cached value from current cells value.
 - "§" : Like "#", but it calls the first method, regardless of the cells value.
+- ";" : Like ",", but reads entire string into the Tape, starting at the Tape Pointer.

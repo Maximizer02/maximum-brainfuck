@@ -122,6 +122,14 @@ namespace MaximumBrainfuck
                         returnStack.Push(codePointer);
                         codePointer=methodList[0];
                     break;
+                    case';':
+                       string inputString = Console.ReadLine();
+                       char[] inputChars = inputString.ToCharArray();
+                       for (int i = 0; i < inputChars.Length; i++)
+                       {
+                        tape[tapePointer+i] = inputChars[i];
+                       }
+                    break;
                 }
                 //Console.WriteLine(tape[0]+";"+tape[1]);
                 codePointer++;
