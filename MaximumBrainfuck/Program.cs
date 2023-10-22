@@ -134,6 +134,9 @@ namespace MaximumBrainfuck
                         tapePointer=0;
                         tape=new int[1000];
                     break;
+                    case'°':
+                        tape[tapePointer]=tapePointer;
+                    break;
                 }
                 //Console.WriteLine(tape[0]+";"+tape[1]);
                 codePointer++;
