@@ -27,3 +27,4 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - "*" : Multiply value of current cell with cached value.
 - "/" : Divide value of current cell by cached value, value will be floored.
 - "&" : Add cached value onto current cells value.
+- "|" : Subtract cached value from current cells value.
