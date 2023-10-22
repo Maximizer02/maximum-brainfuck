@@ -130,6 +130,10 @@ namespace MaximumBrainfuck
                         tape[tapePointer+i] = inputChars[i];
                        }
                     break;
+                    case'~':
+                        tapePointer=0;
+                        tape=new int[1000];
+                    break;
                 }
                 //Console.WriteLine(tape[0]+";"+tape[1]);
                 codePointer++;
