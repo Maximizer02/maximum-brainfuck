@@ -17,6 +17,7 @@ namespace MaximumBrainfuck
             int[] tape = new int[1000];
             Stack<int> returnStack = new Stack<int>();
             List<int> methodList = new List<int>();
+            bool condition = true;
             int cache = 0;
             int tapePointer = 0;
             int codePointer = 0;
@@ -137,6 +138,24 @@ namespace MaximumBrainfuck
                     case'°':
                         tape[tapePointer]=tapePointer;
                     break;
+                    case'{':
+                        if(!condition){
+                            while(code[codePointer]!=125)
+                            {
+                                codePointer++;
+                            }
+                        }
+                    break;
+                    case'€':
+                        condition=tape[tapePointer]>cache;
+                    break;
+                    case'$':
+                        condition=tape[tapePointer]<cache;
+                    break;
+                    case'µ':
+                        condition=tape[tapePointer]==cache;
+                    break;
+
                 }
                 //Console.WriteLine(tape[0]+";"+tape[1]);
                 codePointer++;

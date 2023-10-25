@@ -32,3 +32,23 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - ";" : Like ",", but reads entire string into the Tape, starting at the Tape Pointer.
 - "~" : Reset Tape and Pointer.
 - "°" : Write cell index into current cell.
+- "{" : Start off if clause, code in the brackets is executed when condition is true.
+- "}" : Does nothing on its own, terminates an if clause.
+- "$" : Conditon is true if the cells value is lower than the cached one, else false.
+- "€" : Conditon is true if the cells value is higher than the cached one, else false.
+- "µ" : Conditon is true if the cells value is equal to the cached one, else false.
+
+
+
+### Demo code
+
+#### Output Ascii number of Inputted character
+    ,:
+
+#### Fibonacci sequence
+    (>>_+++^+.<<)+++++>>+<<[>&?:§>&:§?<<-]
+
+#### Output Inputted string
+    ;[.>]
+#### Print all cell numbers upto the number of the key you pressed
+    ,?[>°:µ{_}]
