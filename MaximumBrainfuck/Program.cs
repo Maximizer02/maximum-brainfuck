@@ -155,6 +155,9 @@ namespace MaximumBrainfuck
                     case'µ':
                         condition=tape[tapePointer]==cache;
                     break;
+                    case'\\':
+                        condition = !condition;
+                    break;
 
                 }
                 //Console.WriteLine(tape[0]+";"+tape[1]);

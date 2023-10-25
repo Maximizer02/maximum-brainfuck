@@ -37,7 +37,7 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - "$" : Conditon is true if the cells value is lower than the cached one, else false.
 - "€" : Conditon is true if the cells value is higher than the cached one, else false.
 - "µ" : Conditon is true if the cells value is equal to the cached one, else false.
-
+- "\\" : Invert the current Condition value.
 
 
 ### Demo code
@@ -53,5 +53,9 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 
 #### Caesar cipher
     ;[+++.>]    
+
 #### Print all cell numbers upto the number of the key you pressed
     ,?[>°:µ{_}]
+
+#### Print cell numbers with line breaks (recursive)
+    (°${:>_+++^+._§})++++^^?_§
