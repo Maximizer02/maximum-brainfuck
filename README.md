@@ -50,5 +50,8 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 
 #### Output Inputted string
     ;[.>]
+
+#### Caesar cipher
+    ;[+++.>]    
 #### Print all cell numbers upto the number of the key you pressed
     ,?[>°:µ{_}]
