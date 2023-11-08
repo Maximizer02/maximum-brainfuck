@@ -22,7 +22,7 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - ")" : End off Method.
 - "#" : Call Method of current Cell value. (1st Method:0, 2nd Method:1 etc)
 - "?" : Put value of current cell into cache.
-- "!" : Put cached value into current cell.
+- "!" : Put cached value intos current cell.
 - "^" : Square the current value of the cell.
 - "*" : Multiply value of current cell with cached value.
 - "/" : Divide value of current cell by cached value, value will be floored.
@@ -38,7 +38,7 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - "€" : Conditon is true if the cells value is higher than the cached one, else false.
 - "µ" : Conditon is true if the cells value is equal to the cached one, else false.
 - "\\" : Invert the current Condition value.
-
+- '"' : Insert string into tape via code, inserts in the same way as ";".
 
 ### Demo code
 

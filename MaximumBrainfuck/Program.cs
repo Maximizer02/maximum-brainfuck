@@ -86,7 +86,7 @@ namespace MaximumBrainfuck
                         break;
                     case'(':
                         methodList.Add(codePointer);
-                        while(code[codePointer]!=41)
+                        while(codePointer<code.Length&&code[codePointer]!=41)
                         {
                             codePointer++;
                         }
@@ -140,7 +140,7 @@ namespace MaximumBrainfuck
                     break;
                     case'{':
                         if(!condition){
-                            while(code[codePointer]!=125)
+                            while(codePointer<code.Length&&code[codePointer]!=125)
                             {
                                 codePointer++;
                             }
@@ -157,6 +157,16 @@ namespace MaximumBrainfuck
                     break;
                     case'\\':
                         condition = !condition;
+                    break;
+                    case'"':
+                    codePointer++;
+                        int j=0;
+                        while(codePointer<code.Length&&code[codePointer]!='"')
+                        {
+                            tape[tapePointer+j] = code[codePointer];
+                            j++;
+                            codePointer++;
+                        }
                     break;
 
                 }
