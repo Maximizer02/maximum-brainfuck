@@ -37,6 +37,7 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - "$" : Conditon is true if the cells value is lower than the cached one, else false.
 - "€" : Conditon is true if the cells value is higher than the cached one, else false.
 - "µ" : Conditon is true if the cells value is equal to the cached one, else false.
+- "%" : Condition is true when the current cells value is divisible by he cached value.
 - "\\" : Invert the current Condition value.
 - '"' : Insert string into tape via code, inserts in the same way as ";".
 

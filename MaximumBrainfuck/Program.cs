@@ -158,6 +158,9 @@ namespace MaximumBrainfuck
                     case'\\':
                         condition = !condition;
                     break;
+                    case'%':
+                        condition= tape[tapePointer]%cache==0;
+                    break;
                     case'"':
                     codePointer++;
                         int j=0;
