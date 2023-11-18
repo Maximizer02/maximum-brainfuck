@@ -60,3 +60,6 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 
 #### Print cell numbers with line breaks (recursive)
     (°${:>_+++^+._§})++++^^?_§
+
+#### If Else Statement (Whole number check)
+    ++?,%{"Yes"[.>]}\{"No"[.>]}
