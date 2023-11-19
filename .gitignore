@@ -2,3 +2,5 @@
 /.vs
 MaximumBrainfuck/bin
 MaximumBrainfuck/obj
+MaximumBrainfuck/Properties/PublishProfiles
+MaximumBrainfuck/MaximumBrainfuck.csproj.user
