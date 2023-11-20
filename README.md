@@ -63,3 +63,6 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 
 #### If Else Statement (Whole number check)
     ++?,%{"Yes"[.>]}\{"No"[.>]}
+
+#### FizzBuzz
+    (<_+++^+.>)+++^+^?[><!>_+++?°%{"Fizz"[.>]<<<<}_+++++?°%{"Buzz"[.>]<<<<}_+++?°%\{_+++++?°%\{:}}<?>§µ{_}]
