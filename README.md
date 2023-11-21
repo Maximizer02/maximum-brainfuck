@@ -66,3 +66,6 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 
 #### FizzBuzz
     (+++)§^+^?[!>_§?°%{"Fizz"[.>]<<<<}_§++?°%{"Buzz"[.>]<<<<}_§?°%\{_§++?°%\{:}}<?_§^+.>µ{_}]
+
+#### Print reversed String
+    ;[>]°?[<.!-?]
