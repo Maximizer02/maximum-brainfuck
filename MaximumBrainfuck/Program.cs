@@ -235,6 +235,11 @@ namespace MaximumBrainfuck
                         codePointer++;
                     }
                     break;
+                //Idea: Functions that set the current cell to the value calculated on another simulated tape
+                //Would work with stack-based cache
+                //'⍝(+++^+)§:' prints 10
+                //With not yet implemented stack based cache:
+                //  '⍝(!>+++^+?<*)⍝()+?++?++^?§:_++#§:_++#§:_++#' prints 10
             }
         }
     }

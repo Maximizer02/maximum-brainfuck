@@ -46,7 +46,7 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 #### Output Ascii number of Inputted character
     ,:
 
-#### Fibonacci sequence
+#### Fibonacci sequence (eg. 10)
     (>>_+++^+.<<)+++++>>+<<[>&?:§>&:§?<<-]
 
 #### Output Inputted string
@@ -58,10 +58,10 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 #### Print all cell numbers upto the number of the key you pressed
     ,?[>°:µ{_}]
 
-#### Print cell numbers with line breaks (recursive)
+#### Print cell numbers with line breaks (recursive, eg. 255)
     (°${:>_+++^+._§})++++^^?_§
 
-#### If Else Statement (Whole number check)
+#### If Else Statement (eg. Whole number check)
     ++?,%{"Yes"[.>]}\{"No"[.>]}
 
 #### FizzBuzz
@@ -69,3 +69,6 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 
 #### Print reversed String
     ;[>]°?[<.!-?]
+
+#### Factorial Numbers (eg. 6)
+    ++++++?>+>!<<[>>?-<*<-]>:
