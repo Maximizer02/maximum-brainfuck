@@ -128,11 +128,7 @@ namespace MaximumBrainfuck
                     break;
                 //Start Method
                 case '(':
-                    methodList.Add(codePointer);
-                    while (codePointer < code.Length && code[codePointer] != 41)
-                    {
-                        codePointer++;
-                    }
+                    startOfMethod(code);
                     break;
                 //End off Method
                 case ')':
@@ -178,12 +174,7 @@ namespace MaximumBrainfuck
                     break;
                 //Input entire string
                 case ';':
-                    string inputString = Console.ReadLine();
-                    char[] inputChars = inputString.ToCharArray();
-                    for (int i = 0; i < inputChars.Length; i++)
-                    {
-                        tape[tapePointer + i] = inputChars[i];
-                    }
+                    stringInput();
                     break;
                 //Reset Tape
                 case '~':
@@ -196,13 +187,7 @@ namespace MaximumBrainfuck
                     break;
                 //Start if statement
                 case '{':
-                    if (!condition)
-                    {
-                        while (codePointer < code.Length && code[codePointer] != 125)
-                        {
-                            codePointer++;
-                        }
-                    }
+                    ifClause(code);
                     break;
                 //Set condition to reslt of cell > cache
                 case '€':
@@ -226,14 +211,7 @@ namespace MaximumBrainfuck
                     break;
                 //Marks string to be inserted into tape
                 case '"':
-                    codePointer++;
-                    int j = 0;
-                    while (codePointer < code.Length && code[codePointer] != '"')
-                    {
-                        tape[tapePointer + j] = code[codePointer];
-                        j++;
-                        codePointer++;
-                    }
+                    stringLiteral(code);
                     break;
                 //Idea: Functions that set the current cell to the value calculated on another simulated tape
                 //Would work with stack-based cache
@@ -241,6 +219,82 @@ namespace MaximumBrainfuck
                 //With not yet implemented stack based cache:
                 //  '⍝(!>+++^+?<*)⍝()+?++?++^?§:_++#§:_++#§:_++#' prints 10
             }
+        }
+
+        //Outsourced parts of the switch statement
+
+
+        static void startOfMethod(char[] code){
+            methodList.Add(codePointer);
+            while (codePointer < code.Length && code[codePointer] != 41)
+            {
+                codePointer++;
+            }
+        }
+
+
+        static void stringInput(){
+            string inputString = Console.ReadLine();
+            int? number = getNumberOfString(inputString);
+            if(number!=null){
+                tape[tapePointer]=(int)number;
+                return;
+            }
+            char[] inputChars = inputString.ToCharArray();
+            for (int i = 0; i < inputChars.Length; i++)
+            {
+                tape[tapePointer + i] = inputChars[i];
+            }
+        }
+
+
+        static void ifClause(char[] code){
+            if (!condition)
+                    {
+                        while (codePointer < code.Length && code[codePointer] != 125)
+                        {
+                            codePointer++;
+                        }
+                    }
+        }
+
+        static void stringLiteral(char[] code){
+            codePointer++;
+            string text = "";
+            while (codePointer < code.Length && code[codePointer] != '"')
+            {
+                text+= code[codePointer];
+                codePointer++;
+            }
+            //Check string if it is an int literal
+            int? number = getNumberOfString(text);
+            if(number!=null){
+                tape[tapePointer]=(int)number;
+                return;
+            }
+            int j = 0;
+            while(tapePointer<tape.Length && j<text.Length){
+                tape[tapePointer+j]=text[j];
+                j++;
+            }
+        }
+
+        
+        //Helping Methods
+
+        static int? getNumberOfString(string text){
+            int identifierSize = 3;
+            string numberIdentifier = text.Substring(0,identifierSize);
+            string number = text.Substring(identifierSize,text.Length-identifierSize);
+            switch(numberIdentifier){
+                case@"0d\":
+                return int.Parse(number);
+                case @"0b\":
+                return Convert.ToInt32(number,2);
+                case @"0x\":
+                return Convert.ToInt32(number, 16);
+            }
+            return null;
         }
     }
 }

@@ -39,7 +39,8 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - "µ" : Conditon is true if the cells value is equal to the cached one, else false.
 - "%" : Condition is true when the current cells value is divisible by he cached value.
 - "\\" : Invert the current Condition value.
-- '"' : Insert string into tape via code, inserts in the same way as ";".
+- '"' : Insert string into tape via code, inserts in the same way as ";". Can also be used for Integer Literals with "0d\\"(decimal), "0b\\"(binary) and "0x\\"(hexadecimal)
+
 
 ### Demo code
 
@@ -72,3 +73,14 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 
 #### Factorial Numbers (eg. 6)
     ++++++?>+>!<<[>>?-<*<-]>:
+
+#### Integer Literals
+    "0d\420":   
+        Prints the Number 420
+    "0x\BB":
+        Prints the Number 187
+    "0b\1000101"
+        Prints the Number 69
+
+#### Method selection (0d\1: 'First Method' etc. )
+    (_"First Method"[.>])(_"Second Method"[.>])(_"Third Method"[.>]);-#
