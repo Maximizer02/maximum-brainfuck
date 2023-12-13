@@ -1,0 +1,9 @@
+(start function "Hello World!"[.>]>)
+(count function °:µ\{_&.>_+#} prints the numbers from 0 to 10)
+§ first call the start method
++++^+ set cell to number 10
+. print it	makes a line break
+? save number 10 to cache
+~ reset the universe because why not
++# call the second method
+

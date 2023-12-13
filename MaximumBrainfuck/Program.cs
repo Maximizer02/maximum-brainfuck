@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
+using MaximumBrainfuck;
+using System.Linq;
 
 namespace MaximumBrainfuck
 {
@@ -32,7 +35,23 @@ namespace MaximumBrainfuck
         static void Main(string[] args)
         {
             if (args.Length > 0)
-                brainfuck(args[0]);
+            try
+            {   
+                string input = args[0];
+                string[] endings = {".mbf", ".bf"};
+                if(File.Exists(input) && endings.Any(i=>input.EndsWith(i))){
+                    input=File.ReadAllText(input);
+                }
+                
+                brainfuck(input);
+            }
+            catch(Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+            }
+                
         }
 
         static void brainfuck(string codeString)
@@ -136,6 +155,7 @@ namespace MaximumBrainfuck
                     break;
                 //Call Method
                 case '#':
+                    if(methodList.Count-1 < tape[tapePointer])throw new MethodUndefinedException("Method with index '"+tape[tapePointer]+"' was not defined");
                     returnStack.Push(codePointer);
                     codePointer = methodList[tape[tapePointer]];
                     break;
@@ -169,6 +189,7 @@ namespace MaximumBrainfuck
                     break;
                 //Call first Metod
                 case '§':
+                    if(methodList.Count <1)throw new MethodUndefinedException("No default Method Defined");
                     returnStack.Push(codePointer);
                     codePointer = methodList[0];
                     break;
@@ -250,12 +271,12 @@ namespace MaximumBrainfuck
 
         static void ifClause(char[] code){
             if (!condition)
+                {
+                    while (codePointer < code.Length && code[codePointer] != 125)
                     {
-                        while (codePointer < code.Length && code[codePointer] != 125)
-                        {
-                            codePointer++;
-                        }
+                        codePointer++;
                     }
+                }
         }
 
         static void stringLiteral(char[] code){
@@ -284,6 +305,7 @@ namespace MaximumBrainfuck
 
         static int? getNumberOfString(string text){
             int identifierSize = 3;
+            if(text.Length<identifierSize){return null;}
             string numberIdentifier = text.Substring(0,identifierSize);
             string number = text.Substring(identifierSize,text.Length-identifierSize);
             switch(numberIdentifier){
