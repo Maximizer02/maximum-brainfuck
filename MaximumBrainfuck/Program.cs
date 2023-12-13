@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using MaximumBrainfuck;
 using System.Linq;
 
 namespace MaximumBrainfuck
@@ -16,6 +15,8 @@ namespace MaximumBrainfuck
 
         //List with all the positions in code where methodds start
         static List<int> methodList = new List<int>();
+
+        static Dictionary<string, int> methodNames = new Dictionary<string,int>();
 
         //Variable where all boolean logic is saved to
         static bool condition = true;
@@ -155,9 +156,7 @@ namespace MaximumBrainfuck
                     break;
                 //Call Method
                 case '#':
-                    if(methodList.Count-1 < tape[tapePointer])throw new MethodUndefinedException("Method with index '"+tape[tapePointer]+"' was not defined");
-                    returnStack.Push(codePointer);
-                    codePointer = methodList[tape[tapePointer]];
+                    callMethod(tape[tapePointer],"No Method with index '"+tape[tapePointer]+"' defined!");
                     break;
                 //Save current cell value to cache
                 case '?':
@@ -189,9 +188,7 @@ namespace MaximumBrainfuck
                     break;
                 //Call first Metod
                 case '§':
-                    if(methodList.Count <1)throw new MethodUndefinedException("No default Method Defined");
-                    returnStack.Push(codePointer);
-                    codePointer = methodList[0];
+                    callMethod(0,"No default Method defined!");
                     break;
                 //Input entire string
                 case ';':
@@ -234,6 +231,23 @@ namespace MaximumBrainfuck
                 case '"':
                     stringLiteral(code);
                     break;
+                case '´':
+                    string callMethodByName="";
+                    codePointer++;
+                    while (codePointer < code.Length && code[codePointer] != '´')
+                    {
+                        callMethodByName+= code[codePointer];
+                        codePointer++;
+                    }
+                    if(!callMethodByName.Equals(""))
+                    {
+                        if(!methodNames.ContainsKey(callMethodByName))
+                        {
+                            throw new MethodUndefinedException("No Method with Name: '"+callMethodByName+"' defined!");
+                        }
+                        callMethod(methodNames[callMethodByName],"I don't even know...");
+                    }
+                    break;
                 //Idea: Functions that set the current cell to the value calculated on another simulated tape
                 //Would work with stack-based cache
                 //'⍝(+++^+)§:' prints 10
@@ -246,11 +260,33 @@ namespace MaximumBrainfuck
 
 
         static void startOfMethod(char[] code){
+            //check wether method has name given
+            int i = 1;
+            string methodName = "";
+            while(code[codePointer+i]>96 &&code[codePointer+i]<123) 
+            {
+                methodName+=code[codePointer+i];
+                i++;
+            }
+            
+
             methodList.Add(codePointer);
+            if(!methodName.Equals("")){methodNames.Add(methodName,methodList.Count-1);}
             while (codePointer < code.Length && code[codePointer] != 41)
             {
                 codePointer++;
             }
+        }
+
+
+        static void callMethod(int index, string error)
+        {
+            if(methodList.Count-1 < index )
+            {
+                throw new MethodUndefinedException(error);
+            }
+            returnStack.Push(codePointer);
+            codePointer = methodList[index];
         }
 
 

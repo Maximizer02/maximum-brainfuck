@@ -29,7 +29,7 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - "&" : Add cached value onto current cells value.
 - "|" : Subtract cached value from current cells value.
 - "§" : Like "#", but it calls the first method, regardless of the cells value.
-- ";" : Like ",", but reads entire string into the Tape, starting at the Tape Pointer.
+- ";" : Like ",", but reads entire string into the Tape, starting at the Tape Pointer. Works with Integer literals.
 - "~" : Reset Tape and Pointer.
 - "°" : Write cell index into current cell.
 - "{" : Start off if clause, code in the brackets is executed when condition is true.
@@ -40,6 +40,7 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - "%" : Condition is true when the current cells value is divisible by he cached value.
 - "\\" : Invert the current Condition value.
 - '"' : Insert string into tape via code, inserts in the same way as ";". Can also be used for Integer Literals with "0d\\"(decimal), "0b\\"(binary) and "0x\\"(hexadecimal)
+- "´" : Call a Method by Name. Name defined directly after the \( in declaration.
 
 
 ### Demo code
@@ -84,3 +85,12 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 
 #### Method selection (0d\1: 'First Method' etc. )
     (_"First Method"[.>])(_"Second Method"[.>])(_"Third Method"[.>]);-#
+
+#### Method access by name
+    (br "0d\10".)(p [.>]´br´)(foo "bar"´p´)(bar "foo"´p´)´bar´´foo´
+
+### To Be Done / Ideas
+- Functions with parameters (kinda like APL)
+- \-e for extended character set
+- \-r for reduced character set
+- \-v for vanilly brainfuck set
