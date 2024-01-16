@@ -93,4 +93,6 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - Functions with parameters (kinda like APL)
 - \-e for extended character set
 - \-r for reduced character set
-- \-v for vanilly brainfuck set
+- \-c for compacted character set
+- \-d for default brainfuck set
+- \-v for version
