@@ -145,15 +145,27 @@ namespace MaximumBrainfuck
 
         void preprocessImports(char[] code)
         {
-            List<string> importedFiles = new List<string>();
+            List<string> importedFilesNames = new List<string>();
             Stack<int> imports = new Stack<int>();
             int importSymbolCounter = 0;
             for(int i = 0; i<code.Length;i++){
-                if(code[i]=='`'){importSymbolCounter++;
+                if(code[i]=='`')
+                {importSymbolCounter++;
                 imports.Push(i);}
             }
-            imports.Reverse();
-            
+            while(imports.Count>0)
+            {
+                int a = imports.First();
+                imports.Pop();
+                int b = imports.First()+1;
+                imports.Pop();
+                importedFilesNames.Add(Utility.substringFromArray(code,b,a));
+            }
+
+            foreach (string item in importedFilesNames)
+            {
+                Console.WriteLine(item);
+            }
         }   
 
 

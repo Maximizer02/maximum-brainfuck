@@ -51,5 +51,16 @@ namespace MaximumBrainfuck
             }
             return result;
         }
+
+        public static string substringFromArray(char[] code, int first, int second)
+        {
+            int length = second-first;
+            string result = "";
+            for (int i = 0; i < length; i++)
+            {
+                result+=code[first+i];
+            }
+            return result;
+        }
     }
 }
