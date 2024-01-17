@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 namespace MaximumBrainfuck
 {
     class MaximumBrainfuck :  Brainfuck, IBrainfuck
@@ -14,8 +15,12 @@ namespace MaximumBrainfuck
             preprocessImports(code);
             while (codePointer < code.Length)
             {
+               
                 brainfuck(code);
+                
+
                 maximumBrainfuck(code);
+                
                 codePointer++;
             }
         }
@@ -130,9 +135,12 @@ namespace MaximumBrainfuck
                 case '´':
                     callMethodByName(code);
                     break;
-                 //case '`':
-                 //   importFile(code);
-                 //   break;
+                case '`':
+                    codePointer++;
+                    while(code[codePointer]!='`'){
+                        codePointer++;
+                    }
+                    break;
                     //Idea: Functions that set the current cell to the value calculated on another simulated tape
                     //Would work with stack-based cache
                     //'⍝(+++^+)§:' prints 10
@@ -146,33 +154,55 @@ namespace MaximumBrainfuck
         void preprocessImports(char[] code)
         {
             List<string> importedFilesNames = new List<string>();
-            Stack<int> imports = new Stack<int>();
-            int importSymbolCounter = 0;
+            Stack<int> importSymbolPositions = new Stack<int>();
+
             for(int i = 0; i<code.Length;i++){
                 if(code[i]=='`')
-                {importSymbolCounter++;
-                imports.Push(i);}
-            }
-            while(imports.Count>0)
-            {
-                int a = imports.First();
-                imports.Pop();
-                int b = imports.First()+1;
-                imports.Pop();
-                importedFilesNames.Add(Utility.substringFromArray(code,b,a));
+                {
+                    importSymbolPositions.Push(i);
+                }
             }
 
-            foreach (string item in importedFilesNames)
+            while(importSymbolPositions.Count>0)
             {
-                Console.WriteLine(item);
+                int a = importSymbolPositions.First();
+                importSymbolPositions.Pop();
+                int b = importSymbolPositions.First()+1;
+                importSymbolPositions.Pop();
+                importedFilesNames.Add(Utility.substringFromArray(code,b,a));
+            }
+            
+            foreach (string fileName in importedFilesNames)
+            {
+                importFile(fileName);
             }
         }   
 
+        void importFile(string file)
+        {
+            char[] fileContents = File.ReadAllText(file).ToCharArray();
+            bool hasOtherImports = false;
+            for(int i = 0; i<fileContents.Length;i++)
+            {
+                if(fileContents[i]=='(')
+                {
+                    string methodCode = Utility.getStringUntilChar(fileContents, ')', true, i, ref i);
+                    string methodName = Regex.Match(methodCode, @"[a-zA-Z0-9]*").Value;
+                    methodCode = Regex.Replace(methodCode, @"[a-zA-Z0-9\ ] ", "");
+                    importedMethods.Add(methodName,methodCode);
+                }
+                if(fileContents[i]=='`')
+                {
+                    hasOtherImports=true;
+                }
+            }
+            if(hasOtherImports){preprocessImports(fileContents);
+            }
+        }
 
 
 
-
-        //Outsourced parts of the switch statement
+        //Outsourced parts of the switch statement lol
 
 
         void startOfMethod(char[] code)
@@ -255,16 +285,20 @@ namespace MaximumBrainfuck
 
         void callMethodByName(char[] code)
         {
+
             string name = Utility.getStringUntilChar(code, '´', true, codePointer, ref codePointer);
             if(importedMethods.ContainsKey(name)){
                 returnStack.Push(codePointer);
                 codePointer=0;
                 char[] method = importedMethods[name].ToCharArray();
-                while(codePointer < code.Length)
+                while(codePointer < method.Length)
                 {
+                    brainfuck(method);
                     maximumBrainfuck(method);
                     codePointer++;
                 }
+                codePointer = returnStack.First();
+                returnStack.Pop();
                 return;
             }
 
@@ -283,7 +317,7 @@ namespace MaximumBrainfuck
             string result="";
             try
             {
-                Console.WriteLine(Utility.getStringUntilChar(code, '`', true,codePointer,ref codePointer));
+                //Console.WriteLine(Utility.getStringUntilChar(code, '`', true,codePointer,ref codePointer));
                 string file = File.ReadAllText(Utility.getStringUntilChar(code, '`', true, codePointer,ref codePointer));
                 result = Utility.findAllMethodDeclarations(file.ToCharArray(),ref codePointer);
             }

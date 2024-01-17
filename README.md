@@ -40,7 +40,7 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - "%" : Condition is true when the current cells value is divisible by he cached value.
 - "\\" : Invert the current Condition value.
 - '"' : Insert string into tape via code, inserts in the same way as ";". Can also be used for Integer Literals with "0d\\"(decimal), "0b\\"(binary) and "0x\\"(hexadecimal)
-- "´" : Call a Method by Name. Name defined directly after the \( in declaration.
+- "´" : Call a Method by Name. Name defined directly after the "\(" in declaration. End Name with space;
 
 
 ### Demo code
@@ -94,5 +94,5 @@ This is my take on extending the Brainfuck interpreter beyond the rather limited
 - \-e for extended character set
 - \-r for reduced character set
 - \-c for compacted character set
-- \-d for default brainfuck set
+- \-s for standard brainfuck set
 - \-v for version

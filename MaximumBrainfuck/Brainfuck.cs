@@ -33,7 +33,7 @@ namespace MaximumBrainfuck
         public static int codePointer = 0;
 
         //Will add functionality to only use standard Brainfuck in the future
-        static ExecutionType executionType = ExecutionType.MAXIMUM;
+        //static ExecutionType executionType ;
 
 
        void IBrainfuck.execute(string input)
